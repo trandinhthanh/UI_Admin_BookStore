@@ -13341,3 +13341,8 @@ section {
 .download-custom i {
     font-size: 40px;
 }
+
+.maxWH-15 {
+    width: 15%;
+    height: 15%;
+}
