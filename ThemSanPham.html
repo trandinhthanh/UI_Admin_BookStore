@@ -10,7 +10,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Tables</title>
+    <title>Chi Tiết Sản Phẩm</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -81,17 +81,17 @@
                             <a href="chart.html">
                                 <i class="fas fa-chart-bar"></i>Charts</a>
                         </li>
-                        <li>
-                            <a href="table.html">
-                                <i class="fas fa-table"></i>Tables</a>
+                        <li class="active">
+                            <a href="SanPham.html">
+                                <i class="fas fa-book"></i>Sản Phẩm</a>
                         </li>
                         <li>
-                            <a href="form.html">
-                                <i class="far fa-check-square"></i>Forms</a>
+                            <a href="DonHang.html">
+                                <i class="far fa-check-square"></i>Đơn Hàng</a>
                         </li>
                         <li>
-                            <a href="calendar.html">
-                                <i class="fas fa-calendar-alt"></i>Calendar</a>
+                            <a href="TaiKhoan.html">
+                                <i class="fas fa-users"></i>Tài khoản</a>
                         </li>
                         <li>
                             <a href="map.html">
@@ -190,16 +190,16 @@
                                 <i class="fas fa-chart-bar"></i>Charts</a>
                         </li>
                         <li class="active">
-                            <a href="table.html">
-                                <i class="fas fa-table"></i>Tables</a>
+                            <a href="SanPham.html">
+                                <i class="fas fa-book"></i>Sản Phẩm</a>
                         </li>
                         <li>
-                            <a href="form.html">
-                                <i class="far fa-check-square"></i>Forms</a>
+                            <a href="DonHang.html">
+                                <i class="far fa-check-square"></i>Đơn Hàng</a>
                         </li>
                         <li>
-                            <a href="calendar.html">
-                                <i class="fas fa-calendar-alt"></i>Calendar</a>
+                            <a href="TaiKhoan.html">
+                                <i class="fas fa-users"></i>Tài khoản</a>
                         </li>
                         <li>
                             <a href="map.html">
@@ -448,7 +448,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- DATA TABLE -->
-                                <h3 class="title-5 m-b-35">Danh sách sản phẩm</h3>
+                                <h3 class="title-5 m-b-35">Chi tiết Sản phẩm</h3>
                                 <form action="">
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -470,7 +470,7 @@
                                                     <input type="number" class="form-control" name="soLuong" placeholder="Số lượng">
                                                 </div>
                                                 <div class="input-group form-group">
-                                                    <textarea name="moTa" rows="8" placeholder="Mô tả sản phẩm" class="form-control"></textarea>
+                                                    <textarea name="moTa" rows="9" placeholder="Mô tả sản phẩm" class="form-control"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -482,14 +482,21 @@
                                                 </div>
                                                 <div class="input-group form-group">
                                                     <span class="input-group-addon"><i class="fa fa-usd" aria-hidden="true"></i></span>
-                                                    <input type="number" class="form-control" name="phanTramGiam" placeholder="Phần trăm giảm giá">
+                                                    <select name="phanTramGiam" class="form-control pro-edt-select form-control-primary">
+                                                        <option value="" >Chương trình giảm giá</option>
+                                                        <option value="opt2">2</option>
+                                                        <option value="opt3">3</option>
+                                                        <option value="opt4">4</option>
+                                                        <option value="opt5">5</option>
+                                                        <option value="opt6">6</option>
+                                                    </select>
                                                 </div>
                                                 <div class="input-group form-group">
                                                     <span class="input-group-addon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
                                                     <input type="text" class="form-control" name="tacGia" placeholder="Tác giả">
                                                 </div>
                                                 <div class="input-group form-group">
-                                                    <select name="select" class="form-control pro-edt-select form-control-primary">
+                                                    <select name="danhMucSanPham" class="form-control pro-edt-select form-control-primary">
                                                         <option value="" >Danh mục sản phẩm</option>
                                                         <option value="opt2">2</option>
                                                         <option value="opt3">3</option>
@@ -501,7 +508,7 @@
                                                 <div class="input-group form-group">
                                                     <div class="dropzone-pro form-control pro-edt-select form-control-primary">
                                                         <div id="dropzone">
-                                                            <div class="dropzone dropzone-custom needsclick" id="demo-upload">
+                                                            <div class="dropzone dropzone-custom needsclick" id="uploadImg">
                                                                 <div class="dz-message needsclick download-custom">
                                                                     <i class="fa fa-download" aria-hidden="true"></i>
                                                                     <h2>Tải ảnh lên</h2>
@@ -551,6 +558,7 @@
 
     <!-- dropzone JS -->
     <script src="js/dropzone.js"></script>
+    <script src="js/them_san_pham.js"></script>
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
