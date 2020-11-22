@@ -10,7 +10,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>Chi Tiết Sản Phẩm</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -29,6 +29,9 @@
     <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
     <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+    <!-- dropzone CSS -->
+    <link rel="stylesheet" href="css/dropzone.css">
 
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
@@ -56,7 +59,7 @@
             <nav class="navbar-mobile">
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
-                        <li class="active">
+                        <li>
                             <a href="index.html">
                                 <i class="fas fa-chart-bar"></i>Doanh Số</a>
                         </li>
@@ -64,7 +67,7 @@
                             <a href="SanPham.html">
                                 <i class="fas fa-book"></i>Sản Phẩm</a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="DonHang.html">
                                 <i class="far fa-check-square"></i>Đơn Hàng</a>
                         </li>
@@ -92,7 +95,7 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li class="active">
+                        <li>
                             <a href="index.html">
                                 <i class="fas fa-chart-bar"></i>Doanh Số</a>
                         </li>
@@ -100,7 +103,7 @@
                             <a href="SanPham.html">
                                 <i class="fas fa-book"></i>Sản Phẩm</a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="DonHang.html">
                                 <i class="far fa-check-square"></i>Đơn Hàng</a>
                         </li>
@@ -126,8 +129,8 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                                <button class="au-btn--submit" type="submit">
+                                <input class="au-input au-input--xl" type="text" name="search" id="valueSearch" placeholder="Tìm sản phẩm" />
+                                <button class="au-btn--submit" type="button" id="btnSearch">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
                             </form>
@@ -284,7 +287,7 @@
                     </div>
                 </div>
             </header>
-            <!-- HEADER DESKTOP-->
+            <!-- END HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
             <div class="main-content">
@@ -292,249 +295,83 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
-                                <h2 class="title-1 m-b-35">Tổng Quan Kinh Doanh</h2>
-                                <div class="table-data__tool">
-                                    <div class="table-data__tool-left">
-                                        <div class="rs-select2--light">
-                                            <input type="checkbox" id="searchAll" name="searchAll" checked>
-                                            <label for="searchAll"> Tìm tất cả</label><br>
-                                        </div>
-                                        <div class="rs-select2--light rs-select2--md">
-                                            <input class="form-control" type="date" id="fromDate">
-                                        </div>
-                                        <div class="rs-select2--light">
-                                            -
-                                        </div>
-                                        <div class="rs-select2--light rs-select2--md">
-                                            <input class="form-control" type="date" id="toDate">
-                                        </div>
-                                    </div>
-                                    <div class="table-data__tool-right">
-                                        <button class="au-btn au-btn-icon au-btn--blue" id="searchDoanhSo">
-                                                <i class="fa fa-search"></i>Tìm Kiếm</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-t-25">
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c1">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-account-o"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2 id="tongSoTaiKhoan"></h2>
-                                                <span>Tài khoản User</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart1"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c2">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-shopping-cart"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2 id="tongDonHang"></h2>
-                                                <span>Đơn Hàng</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart2"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c3">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-money"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2 id="tongTienLoi"></h2>
-                                                <span>Tổng Tiền Lời</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart3"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c4">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-money"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2 id="tongTienThuVe"></h2>
-                                                <span>Tổng Tiền Thu Về</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart4"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="au-card recent-report">
-                                    <div class="au-card-inner">
-                                        <h3 class="title-2">recent reports</h3>
-                                        <div class="chart-info">
-                                            <div class="chart-info__left">
-                                                <div class="chart-note">
-                                                    <span class="dot dot--blue"></span>
-                                                    <span>products</span>
+                                <!-- DATA TABLE -->
+                                <h3 class="title-5 m-b-35">Chi tiết đơn hàng</h3>
+                                <form class="form-donHang">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="review-content-section">
+                                                <div class="input-group form-group">
+                                                    <input type="text" class="form-control" name="idGiaoDich" id="idGiaoDich" hidden>
+                                                    <span class="input-group-addon">Khách hàng</span>
+                                                    <input type="text" class="form-control" name="tenNguoiDung" id="tenNguoiDung" readonly>
                                                 </div>
-                                                <div class="chart-note mr-0">
-                                                    <span class="dot dot--green"></span>
-                                                    <span>services</span>
+                                                <div class="input-group form-group">
+                                                    <span class="input-group-addon">Email</span>
+                                                    <input type="text" class="form-control" name="email" id="email" readonly>
                                                 </div>
-                                            </div>
-                                            <div class="chart-info__right">
-                                                <div class="chart-statis">
-                                                    <span class="index incre">
-                                                        <i class="zmdi zmdi-long-arrow-up"></i>25%</span>
-                                                    <span class="label">products</span>
+                                                <div class="input-group form-group">
+                                                    <span class="input-group-addon">Tổng Tiền</span>
+                                                    <input type="text" class="form-control" name="tongCong" id="tongCong" readonly>
                                                 </div>
-                                                <div class="chart-statis mr-0">
-                                                    <span class="index decre">
-                                                        <i class="zmdi zmdi-long-arrow-down"></i>10%</span>
-                                                    <span class="label">services</span>
+                                                <div class="input-group form-group">
+                                                    <span class="input-group-addon">Ghi chú</span>
+                                                    <input type="text" class="form-control" name="ghiChu" id="ghiChu" readonly>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="recent-report__chart">
-                                            <canvas id="recent-rep-chart"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="au-card chart-percent-card">
-                                    <div class="au-card-inner">
-                                        <h3 class="title-2 tm-b-5">char by %</h3>
-                                        <div class="row no-gutters">
-                                            <div class="col-xl-6">
-                                                <div class="chart-note-wrap">
-                                                    <div class="chart-note mr-0 d-block">
-                                                        <span class="dot dot--blue"></span>
-                                                        <span>products</span>
-                                                    </div>
-                                                    <div class="chart-note mr-0 d-block">
-                                                        <span class="dot dot--red"></span>
-                                                        <span>services</span>
-                                                    </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="review-content-section">
+                                                <div class="input-group form-group">
+                                                    <span class="input-group-addon">Số điện thoại</span>
+                                                    <input type="number" class="form-control" name="soDienThoai" id="soDienThoai" readonly>
                                                 </div>
-                                            </div>
-                                            <div class="col-xl-6">
-                                                <div class="percent-chart">
-                                                    <canvas id="percent-chart"></canvas>
+                                                <div class="input-group form-group">
+                                                    <span class="input-group-addon">Địa chỉ</span>
+                                                    <input type="text" class="form-control" name="diaChi" id="diaChi" readonly>
+                                                </div>
+                                                <div class="input-group form-group">
+                                                    <span class="input-group-addon">Ngày mua</span>
+                                                    <input type="text" class="form-control" name="ngayMua" id="ngayMua" readonly>
+                                                </div>
+                                                <div class="input-group form-group">
+                                                    <span class="input-group-addon">Trạng thái</span>
+                                                    <input type="text" class="form-control" name="trangThai" id="trangThai" readonly>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
+                                <!-- END DATA TABLE -->
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-12">
-                                <h2 class="title-3 m-b-35">Doanh số theo từng sản phẩm</h2>
-                                <!-- DATA TABLE-->
-                                <div class="table-responsive m-b-40">
-                                    <table class="table table-borderless table-data3">
+                                <div class="table-responsive table-responsive-data2">
+                                    <table class="table table-data2">
                                         <thead>
                                             <tr>
-                                                <th>date</th>
-                                                <th>type</th>
-                                                <th>description</th>
-                                                <th>status</th>
-                                                <th>price</th>
+                                                <th>STT</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Giá sản phẩm</th>
+                                                <th>Số lượng</th>
+                                                <th>Thành tiền</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>2018-09-29 05:57</td>
-                                                <td>Mobile</td>
-                                                <td>iPhone X 64Gb Grey</td>
-                                                <td class="process">Processed</td>
-                                                <td>$999.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-28 01:22</td>
-                                                <td>Mobile</td>
-                                                <td>Samsung S8 Black</td>
-                                                <td class="process">Processed</td>
-                                                <td>$756.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-27 02:12</td>
-                                                <td>Game</td>
-                                                <td>Game Console Controller</td>
-                                                <td class="denied">Denied</td>
-                                                <td>$22.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-26 23:06</td>
-                                                <td>Mobile</td>
-                                                <td>iPhone X 256Gb Black</td>
-                                                <td class="denied">Denied</td>
-                                                <td>$1199.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-25 19:03</td>
-                                                <td>Accessories</td>
-                                                <td>USB 3.0 Cable</td>
-                                                <td class="process">Processed</td>
-                                                <td>$10.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-29 05:57</td>
-                                                <td>Accesories</td>
-                                                <td>Smartwatch 4.0 LTE Wifi</td>
-                                                <td class="denied">Denied</td>
-                                                <td>$199.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-24 19:10</td>
-                                                <td>Camera</td>
-                                                <td>Camera C430W 4k</td>
-                                                <td class="process">Processed</td>
-                                                <td>$699.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-22 00:43</td>
-                                                <td>Computer</td>
-                                                <td>Macbook Pro Retina 2017</td>
-                                                <td class="process">Processed</td>
-                                                <td>$10.00</td>
-                                            </tr>
+                                        <tbody id="sanPhamOrder">
                                         </tbody>
                                     </table>
                                 </div>
-                                <!-- END DATA TABLE                  -->
+                            </div>
+                        </div>
+                        <div class="row mt-50">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="text-center form-group custom-pro-edt-ds">
+                                    <button type="button" class="btn btn-warning waves-effect waves-light" id="backPage">Quay lại</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- END MAIN CONTENT-->
-            <!-- END PAGE CONTAINER-->
         </div>
 
     </div>
@@ -545,25 +382,23 @@
     <script src="vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <!-- Vendor JS       -->
-    <script src="vendor/slick/slick.min.js">
-    </script>
+    <script src="vendor/slick/slick.min.js"></script>
     <script src="vendor/wow/wow.min.js"></script>
     <script src="vendor/animsition/animsition.min.js"></script>
-    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
+    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
     <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="vendor/counter-up/jquery.counterup.min.js">
-    </script>
+    <script src="vendor/counter-up/jquery.counterup.min.js"></script>
     <script src="vendor/circle-progress/circle-progress.min.js"></script>
     <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="vendor/select2/select2.min.js">
-    </script>
+    <script src="vendor/select2/select2.min.js"></script>
 
+    <!-- dropzone JS -->
+    <script src="js/dropzone.js"></script>
     <script src="js/check_login.js"></script>
     <script src="js/function_common.js"></script>
     <script src="js/routing.js"></script>
-    <script src="js/index.js"></script>
+    <script src="js/detail_don_hang.js"></script>
 
     <!-- Main JS-->
     <script src="js/main.js"></script>

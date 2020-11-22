@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styleLogin.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ogani | Template</title>
+</head>
+
+<body>
+    <div id="logreg-forms">
+        <form class="form-editUser">
+            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Chỉnh sửa Tài Khoản</h1>
+            <input type="text" name="idNguoiDung" id="idNguoiDung" class="form-control" hidden>
+            <input type="text" name="tenNguoiDung" id="tenNguoiDung" class="form-control" placeholder="Họ và Tên" required="" autofocus="">
+            <input type="email" name="email" id="email" class="form-control" placeholder="Địa chỉ Email" required autofocus="">
+            <input type="text" name="soDienThoai" id="soDienThoai" class="form-control" placeholder="Số điện thoại" required autofocus="">
+            <input type="text" name="diaChi" id="diaChi" class="form-control" placeholder="Địa chỉ nhà" required autofocus="">
+            <input type="password" name="matKhauCu" id="matKhauCu" class="form-control" placeholder="Mật khẩu cũ" required autofocus="">
+            <input type="password" name="matKhauMoi" id="matKhauMoi" class="form-control" placeholder="Mật khẩu" required autofocus="">
+            <input type="password" id="nhapLaiMK" class="form-control" placeholder="Xác nhận mật khẩu" required autofocus="">
+            <span id="messageCreate" class="red"></span>
+            <button class="btn btn-primary btn-block" type="button" id="bntEditUser"><i class="fas fa-user-plus"></i> Xác nhận</button>
+            <a href="index.html"><i class="fas fa-angle-left" id="backPage"></i> Quay lại</a>
+        </form>
+        <br>
+
+    </div>
+    <!-- Jquery JS-->
+    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <script src="js/function_common.js"></script>
+    <script src="js/edit_user.js"></script>
+</body>
+
+</html>
