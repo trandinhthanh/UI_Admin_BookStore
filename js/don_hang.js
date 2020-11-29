@@ -48,7 +48,7 @@
                     <td class="desc">${item.diaChi}</td>
                     <td>${tongTien}</td>
 
-                    <td>${item.ngayMua}</td>
+                    <td>${formatDate(item.ngayMua)}</td>
                     <td>
                         <spam id="trangThaiDonHang" hidden>${item.trangThai}</spam>
                         <span class="${statusClass}">${trangThai}</span>

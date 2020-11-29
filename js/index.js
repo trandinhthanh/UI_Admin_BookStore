@@ -24,8 +24,7 @@
             if (fromDate == "" || toDate == "") {
                 alert("Đã bỏ chọn tìm tất cả, Vui lòng chọn ngày bắt đầu và kết thúc để tìm kiếm!");
                 return;
-            }
-            if (fromDate > toDate) {
+            } else if (fromDate > toDate) {
                 alert("Vui lòng chọn ngày bắt đầu sau kết thúc để tìm kiếm!");
                 return;
             }
@@ -45,6 +44,7 @@ function getDoanhSo() {
         contentType: false,
         success: function(result) {
             replateDateDoanhSo(result);
+            loadDanhSachDoanhSoSP(result.doanhSoSanPhamList);
         },
         error: function(e) {
             console.log("ERROR : ", e);
@@ -63,6 +63,7 @@ function getDoanhSoByDate(fromDate, toDate) {
         contentType: false,
         success: function(result) {
             replateDateDoanhSo(result);
+            loadDanhSachDoanhSoSP(result.doanhSoSanPhamList);
         },
         error: function(e) {
             console.log("ERROR : ", e);
@@ -76,4 +77,20 @@ function replateDateDoanhSo(data) {
     $("#tongDonHang").text(formatNumberSimple(data.tongDonHang));
     $("#tongTienLoi").text(formatMoney(data.tongTienLoi));
     $("#tongTienThuVe").text(formatMoney(data.tongTienThuVe));
+}
+
+function loadDanhSachDoanhSoSP(data) {
+    $('#listDoanhThu').empty();
+    $.each(data, function(index, item) {
+        $('#listDoanhThu').append(
+            `<tr>
+                <td>${item.tenSanPham}</td>
+                <td>${item.loai}</td>
+                <td>${item.soLuong}</td>
+                <td>${formatMoney(item.tienVon)}</td>
+                <td>${formatMoney(item.tienLoi)}</td>
+                <td>${formatMoney(item.tienThuVe)}</td>
+            </tr>`
+        );
+    });
 }

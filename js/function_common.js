@@ -30,6 +30,15 @@ function convertJson(id) {
     return JSON.stringify(obj);
 }
 
+function getDataForm(id) {
+    var data = $(id).serializeArray();
+    var obj = {};
+    for (var key in data) {
+        obj[data[key].name] = data[key].value;
+    }
+    return obj;
+}
+
 function setDataInForm(id, values) {
     var data = $(id).serializeArray();
     for (var key in data) {
@@ -42,4 +51,10 @@ function setDataInForm(id, values) {
         }
 
     }
+}
+
+function formatDate(date) {
+    var d = new Date(date);
+    return d.toLocaleDateString("vi-VN");
+
 }

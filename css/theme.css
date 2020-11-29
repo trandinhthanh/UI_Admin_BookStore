@@ -13362,3 +13362,9 @@ section {
 .mt-50 {
     margin-top: 50px !important;
 }
+
+.input-field {
+    position: relative;
+    margin-top: 2.2rem;
+    background-color: #ffffff;
+}

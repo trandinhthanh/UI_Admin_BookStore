@@ -10,7 +10,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Tables</title>
+    <title>Chi Tiết Sản Phẩm</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -126,8 +126,8 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                                <button class="au-btn--submit" type="submit">
+                                <input class="au-input au-input--xl" type="text" name="search" id="valueSearch" placeholder="Tìm sản phẩm" />
+                                <button class="au-btn--submit" type="button" id="btnSearch">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
                             </form>
@@ -293,52 +293,52 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- DATA TABLE -->
-                                <h3 class="title-5 m-b-35">Danh sách chương trình</h3>
-                                <div class="table-data__tool">
-                                    <div class="table-data__tool-left">
-                                        <div class="rs-select2--light rs-select2--md">
-                                            <select class="js-select2" name="property">
-                                                <option selected="selected">All Properties</option>
-                                                <option value="">Option 1</option>
-                                                <option value="">Option 2</option>
-                                            </select>
-                                            <div class="dropDownSelect2"></div>
+                                <h3 class="title-5 m-b-35">Chi tiết chương trình</h3>
+                                <form class="form-giamGia">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="review-content-section">
+                                                <div class="input-group form-group">
+                                                    <input type="text" class="form-control" name="idGiamGia" id="idGiamGia" hidden>
+                                                    <span class="input-group-addon">Tên giảm giá</i></span>
+                                                    <input type="text" class="form-control" name="tenGiamGia" id="tenGiamGia" required>
+                                                </div>
+                                                <div class="input-group form-group">
+                                                    <span class="input-group-addon">Ngày bắt đầu</i></span>
+                                                    <input type="date" class="form-control" name="ngayBatDau" id="ngayBatDau" required>
+                                                </div>
+                                                <div class="input-group form-group">
+                                                    <textarea name="moTa" rows="6" placeholder="Mô tả chi tiết" id="moTa" class="form-control"></textarea>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="rs-select2--light rs-select2--sm">
-                                            <select class="js-select2" name="time">
-                                                <option selected="selected">Today</option>
-                                                <option value="">3 Days</option>
-                                                <option value="">1 Week</option>
-                                            </select>
-                                            <div class="dropDownSelect2"></div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <div class="review-content-section">
+                                                <div class="input-group form-group">
+                                                    <span class="input-group-addon">Phần trăm giảm giá</i></span>
+                                                    <input type="number" class="form-control" name="phanTramGiam" id="phanTramGiam" min="1" max="99" required>
+                                                </div>
+                                                <div class="input-group form-group">
+                                                    <span class="input-group-addon">Ngày kết thúc</i></span>
+                                                    <input type="date" class="form-control" name="ngayKetThuc" id="ngayKetThuc" required>
+                                                </div>
+                                                <div class="input-group form-group">
+                                                    <span class="input-group-addon">Trạng thái</i></span>
+                                                    <input type="text" class="form-control" name="trangThai" id="trangThai" readonly>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <button class="au-btn-filter">
-                                            <i class="zmdi zmdi-filter-list"></i>filters</button>
                                     </div>
-                                    <div class="table-data__tool-right">
-                                        <a href="DetailChuongTrinh.html" class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                            <i class="zmdi zmdi-plus"></i>Thêm Chương trình</a>
-                                    </div>
-                                </div>
-                                <div class="table-responsive table-responsive-data2">
-                                    <table class="table table-data2">
-                                        <thead>
-                                            <tr>
-                                                <th>Tên giảm giá</th>
-                                                <th>Phần trăm giảm giá</th>
-                                                <th>Ngày bắt đầu</th>
-                                                <th>ngày kết thúc</th>
-                                                <th>Người tạo</th>
-                                                <th>Trạng thái</th>
-                                                <th>Thao tác</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="listGiamGia">
-
-                                        </tbody>
-                                    </table>
-                                </div>
+                                </form>
                                 <!-- END DATA TABLE -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="text-center form-group custom-pro-edt-ds">
+                                    <button type="button" class="btn btn-warning waves-effect waves-light" id="backPage">Quay lại</button>
+                                    <button type="button" class="btn btn-primary waves-effect waves-light m-r-10" id="luuGiamGia">Lưu Chương Trình</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -365,10 +365,11 @@
     <script src="vendor/chartjs/Chart.bundle.min.js"></script>
     <script src="vendor/select2/select2.min.js"></script>
 
+
     <script src="js/check_login.js"></script>
     <script src="js/function_common.js"></script>
     <script src="js/routing.js"></script>
-    <script src="js/chuong_trinh.js"></script>
+    <script src="js/detail_chuong_trinh.js"></script>
 
     <!-- Main JS-->
     <script src="js/main.js"></script>

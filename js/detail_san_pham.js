@@ -1,12 +1,5 @@
 (function($) {
 
-    $("div#uploadImg").dropzone({ url: "/file/post" });
-    // var data = $('div#uploadImg')[0].dropzone.getAcceptedFiles()[0];
-    // $.ajax({
-    //     url: "location.url",
-    //     data: data
-    // }).done(function() {});
-
     loadGiamGia();
     loadDanhMuc();
 
@@ -24,23 +17,39 @@
                 // result.giaGoc = formatNumberSimple(result.giaGoc);
                 // result.gia = formatNumberSimple(result.gia);
                 setDataInForm('.form-item', result);
+                let listImg = [];
+
+                $.each(result.danhSachLinkHinh, function(index, item) {
+                    listImg.push({ id: index + 1, src: `http://localhost:8080/file/img/${item}` });
+                });
+
+                $('.input-images').imageUploader({
+                    preloaded: listImg,
+                    imagesInputName: 'photos',
+                    preloadedInputName: 'old',
+                    maxSize: 2 * 1024 * 1024,
+                    maxFiles: 10
+                });
             },
             error: function(e) {
                 console.log("ERROR : ", e);
 
             }
         });
+    } else {
+        $('.input-images').imageUploader();
     }
 
     $("#luuSanPham").click(function(e) {
-        // var account = JSON.parse(localStorage.getItem("account"));
-        var data = convertJson('.form-item');
+        var account = JSON.parse(localStorage.getItem("account"));
+        var data = getDataForm('.form-item');
         if (data != null && $('.form-item')[0].checkValidity() && $("#idDanhMucSP").val() != "0") {
             if ($("#idSanPham").val() == null || $("#idSanPham").val() == "") {
-                // data.nguoiTao = account.idNguoiDung;
-                create(data);
+                data.nguoiTao = account.idNguoiDung;
+                create(JSON.stringify(data));
             } else {
-                update(data);
+                data.nguoiThayDoi = account.idNguoiDung;
+                update(JSON.stringify(data));
             }
         } else {
             alert("Vui lòng kiểm tra lại thông tin còn thiếu!");
@@ -60,7 +69,7 @@ function create(data) {
         crossDomain: true,
         success: function(result) {
             $("#idSanPham").val(result.idSanPham)
-            alert("Thêm sản phẩm thành công!");
+            uploadImg("insert", result.idSanPham);
         },
         error: function(e) {
             alert("Thêm sản phẩm không thành công!");
@@ -79,7 +88,7 @@ function update(data) {
         async: false,
         crossDomain: true,
         success: function(result) {
-            alert("Sửa sản phẩm thành công!");
+            uploadImg("update", result.idSanPham);
         },
         error: function(e) {
             alert("Sửa sản phẩm không thành công!");
@@ -89,6 +98,37 @@ function update(data) {
     });
 }
 
+function uploadImg(type, idSanPham) {
+    // lấy img từ tag input
+    let $inputImages = $('.form-item').find('input[name^="images"]');
+    if (!$inputImages.length) {
+        $inputImages = $('.form-item').find('input[name^="photos"]')
+    }
+
+    var formData = new FormData();
+    formData.append("idSanPham", idSanPham);
+
+    for (let index = 0; index < $inputImages[0].files.length; index++) {
+        formData.append("files", $inputImages[0].files[index]);
+    }
+
+
+    var request = new XMLHttpRequest();
+    request.open("POST", "http://localhost:8080/file/img/upload", false);
+    request.onreadystatechange = function() {
+        if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+            if (type == "insert") {
+                alert("Thêm sản phẩm thành công!");
+            } else {
+                alert("Cập nhật sản phẩm thành công!");
+            }
+        } else {
+            alert("Thêm ảnh sản phẩm không thành công!");
+            location.reload();
+        }
+    };
+    request.send(formData);
+}
 
 function loadGiamGia() {
     $.ajax({

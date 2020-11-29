@@ -29,6 +29,7 @@
                     statusClass = "status--denied";
                 }
                 $("#trangThai").addClass(statusClass);
+                result.ngayMua = formatDate(result.ngayMua);
                 setDataInForm('.form-donHang', result);
                 $.each(result.sanPhamThanhTiens, function(index, item) {
                     var thanhTien = formatMoney(item.gia);
