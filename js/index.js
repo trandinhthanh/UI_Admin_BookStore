@@ -5,8 +5,8 @@
 
     $('#searchAll').click(function() {
         if ($(this).is(':checked')) {
-            $('#fromDate').attr("readonly", true);
-            $('#toDate').attr("readonly", true);
+            $('#fromDate').val("").attr("readonly", true);
+            $('#toDate').val("").attr("readonly", true);
 
         } else {
             $('#fromDate').attr("readonly", false);

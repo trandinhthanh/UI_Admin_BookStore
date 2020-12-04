@@ -1,49 +1,5 @@
 (function($) {
-    $.ajax({
-        type: "GET",
-        enctype: 'multipart/form-data',
-        url: "http://localhost:8080/danhMucSP/listDanhMucSanPham",
-        async: false,
-        crossDomain: true,
-        contentType: false,
-        success: function(data) {
-            $.each(data, function(key, item) {
-                var statusClass = "status--process";
-                var trangThai = "Đang hoạt động";
-                var btnName = "Ẩn sản phẩm"
-                if (item.trangThai == "0") {
-                    statusClass = "status--denied";
-                    trangThai = "Đang ẩn";
-                    btnName = "Hiển thị sản phẩm"
-                }
-                $('#listDanhMuc').append(
-                    `<tr class="tr-shadow" id="row_${item.idDanhMucSP}">
-                        <td>
-                            ${item.tenDanhMuc}
-                        </td>
-                        <td>
-                            <span class="${statusClass}"  id="status_${item.idDanhMucSP}">${trangThai}</span>
-                        </td>
-                        <td>
-                            <div class="table-data-feature">
-                                <button class="item" data-toggle="tooltip" data-placement="top" title="Sửa" onclick="suaDanhMuc(${item.idDanhMucSP})">
-                                    <i class="zmdi zmdi-edit"></i>
-                                </button>
-                                <button class="item" data-toggle="tooltip" data-placement="top" id="btn_${item.idDanhMucSP}" title="${btnName}" onclick="anDanhMuc(${item.idDanhMucSP})">
-                                    <i class="zmdi zmdi-delete"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="spacer"></tr>`
-                );
-            });
-        },
-        error: function(e) {
-            console.log("ERROR : ", e);
-
-        }
-    });
+    searchAllDanhMuc();
 
     $("#luuDanhMuc").click(function(e) {
         var data = getDataForm('.form-danhMuc');
@@ -92,7 +48,86 @@
             return;
         }
     })
+
+    $("#btnSearch").click(function(e) {
+        var valueSearch = $("#valueSearch").val();
+        if (valueSearch != "") {
+            $.ajax({
+                type: "GET",
+                enctype: 'multipart/form-data',
+                url: "http://localhost:8080/danhMucSP/findByTenDanhMuc/" + valueSearch,
+                async: false,
+                crossDomain: true,
+                contentType: false,
+                success: function(data) {
+                    $('#listDanhMuc').empty();
+                    loadDanhMuc(data);
+                },
+                error: function(e) {
+                    console.log("ERROR : ", e);
+                }
+            });
+        } else {
+            searchAllDanhMuc();
+        }
+    });
+
 })(jQuery);
+
+function searchAllDanhMuc() {
+    $.ajax({
+        type: "GET",
+        enctype: 'multipart/form-data',
+        url: "http://localhost:8080/danhMucSP/listDanhMucSanPham",
+        async: false,
+        crossDomain: true,
+        contentType: false,
+        success: function(data) {
+            $('#listDanhMuc').empty();
+            loadDanhMuc(data);
+        },
+        error: function(e) {
+            console.log("ERROR : ", e);
+
+        }
+    });
+}
+
+function loadDanhMuc(data) {
+    $.each(data, function(index, item) {
+        index++;
+        var statusClass = "status--process";
+        var trangThai = "Đang hoạt động";
+        var btnName = "Ẩn sản phẩm"
+        if (item.trangThai == "0") {
+            statusClass = "status--denied";
+            trangThai = "Đang ẩn";
+            btnName = "Hiển thị sản phẩm"
+        }
+        $('#listDanhMuc').append(
+            `<tr class="tr-shadow" id="row_${item.idDanhMucSP}">
+                <td>${index}</td>
+                <td>
+                    ${item.tenDanhMuc}
+                </td>
+                <td>
+                    <span class="${statusClass}"  id="status_${item.idDanhMucSP}">${trangThai}</span>
+                </td>
+                <td>
+                    <div class="table-data-feature">
+                        <button class="item" data-toggle="tooltip" data-placement="top" title="Sửa" onclick="suaDanhMuc(${item.idDanhMucSP})">
+                            <i class="zmdi zmdi-edit"></i>
+                        </button>
+                        <button class="item" data-toggle="tooltip" data-placement="top" id="btn_${item.idDanhMucSP}" title="${btnName}" onclick="anDanhMuc(${item.idDanhMucSP})">
+                            <i class="zmdi zmdi-more"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            <tr class="spacer"></tr>`
+        );
+    });
+}
 
 function suaDanhMuc(idDanhMucSP) {
     $("#detailDanhMuc").attr("style", "padding-right: 17px; display: block;");
@@ -132,12 +167,13 @@ function anDanhMuc(idDanhMucSP) {
             success: function(data) {
                 if (trangThai == "1") {
                     $('#btn_' + idDanhMucSP).attr('data-original-title', "Ẩn danh mục");
-                    $('#status_' + idDanhMucSP).text("Đang hoạt động").addClass("status--process");
-                    // $('#status_' + idDanhMucSP).attr('class', "status--process");
+                    $('#status_' + idDanhMucSP).text("Đang hoạt động");
+                    $('#status_' + idDanhMucSP).attr('class', "status--process");
                     alert("Danh mục đã được hiển thị thành công!");
                 } else {
                     $('#btn_' + idDanhMucSP).attr('data-original-title', "Hiển thị danh mục");
-                    $('#status_' + idDanhMucSP).text("Đang ẩn").addClass("status--denied");
+                    $('#status_' + idDanhMucSP).text("Đang ẩn");
+                    $('#status_' + idDanhMucSP).attr('class', "status--denied");
                     alert("Đã ẩn danh mục thành công!");
                 }
                 $('#btn_' + idDanhMucSP).tooltip('hide');
