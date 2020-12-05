@@ -29,6 +29,29 @@
             }
         });
     });
+
+    $("#btnQuenMK").click(function(e) {
+        if (!$('.form-reset')[0].checkValidity()) {
+            alert("Vui lòng nhập Email!");
+            return false;
+        }
+        var formData = new FormData();
+        formData.append("laQuanLy", true);
+        formData.append("email", $("#resetEmail").val());
+
+        var request = new XMLHttpRequest();
+        request.open("POST", "http://localhost:8080/nguoiDung/quenMatKhau", false);
+        request.onreadystatechange = function() {
+            if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+                alert("Mật khẩu đã được đặt thành số điện thoại của bạn. Bạn vui lòng đăng nhập lại và đổi mật khẩu mới!");
+                window.location.replace("login.html");
+            } else {
+                alert("Email không tồn tại, vui lòng kiểm tra lại!");
+            }
+        };
+        request.send(formData);
+    });
+
 })(jQuery);
 
 function toggleResetPswd(e) {

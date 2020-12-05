@@ -15,11 +15,6 @@
     <div id="logreg-forms">
         <form class="form-signin">
             <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Đăng Nhập</h1>
-            <!-- <div class="social-login">
-                <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
-                <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
-            </div> -->
-            <!-- <p style="text-align:center"> OR </p> -->
             <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Địa chỉ Email" required autofocus="">
             <input type="password" id="inputPassword" name="matKhau" class="form-control" placeholder="Mật khẩu" required>
 
@@ -27,10 +22,10 @@
             <a href="#" id="forgot_pswd">Quên mật khẩu!</a>
         </form>
 
-        <form action="/reset/password/" class="form-reset">
+        <form class="form-reset">
             <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Đặt Lại Mật Khẩu</h1>
             <input type="email" id="resetEmail" class="form-control" placeholder="Địa chỉ Email" required="" autofocus="">
-            <button class="btn btn-primary btn-block" type="submit">Đặt lại mật khẩu</button>
+            <button class="btn btn-primary btn-block" type="button" id="btnQuenMK">Đặt lại mật khẩu</button>
             <a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> Quay lại</a>
         </form>
 
