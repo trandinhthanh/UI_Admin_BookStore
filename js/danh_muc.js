@@ -5,6 +5,7 @@
         var data = getDataForm('.form-danhMuc');
         if (data != null && $('.form-danhMuc')[0].checkValidity()) {
             data.linkDanhMuc = removeVietnameseTones($("#tenDanhMuc").val());
+            data.trangThai = "1";
             if ($("#idDanhMucSP").val() == "") {
                 $.ajax({
                     type: "POST",
@@ -13,9 +14,12 @@
                     data: JSON.stringify(data),
                     async: false,
                     crossDomain: true,
-                    success: function(data) {
+                    success: function(result) {
+                        var temp = [result];
+                        var index = (Number($('#listDanhMuc tr').length) / 2) + 1;
+                        loadDanhMuc(temp, index);
                         alert("Tạo danh mục thành công!")
-                        location.replace();
+                        $("#detailDanhMuc").modal("toggle");
                     },
                     error: function(e) {
                         $('#message').text("Tên danh mục đã tồn tại vui lòng nhập tên khác!")
@@ -31,10 +35,10 @@
                     data: JSON.stringify(data),
                     async: false,
                     crossDomain: true,
-                    success: function(data) {
+                    success: function(result) {
+                        $('#ten_' + result.idDanhMucSP).text(result.tenDanhMuc);
                         alert("Cập nhật danh mục thành công!")
-                        location.replace();
-
+                        $("#detailDanhMuc").modal("toggle");
                     },
                     error: function(e) {
                         $('#message').text("Tên danh mục đã tồn tại vui lòng nhập tên khác!")
@@ -61,7 +65,7 @@
                 contentType: false,
                 success: function(data) {
                     $('#listDanhMuc').empty();
-                    loadDanhMuc(data);
+                    loadDanhMuc(data, 1);
                 },
                 error: function(e) {
                     console.log("ERROR : ", e);
@@ -70,6 +74,11 @@
         } else {
             searchAllDanhMuc();
         }
+    });
+
+    $("#btnThemDanhMuc").click(function(e) {
+        $("#detailDanhMuc").modal("toggle");
+        $('.form-danhMuc')[0].reset();
     });
 
 })(jQuery);
@@ -84,7 +93,7 @@ function searchAllDanhMuc() {
         contentType: false,
         success: function(data) {
             $('#listDanhMuc').empty();
-            loadDanhMuc(data);
+            loadDanhMuc(data, 1);
         },
         error: function(e) {
             console.log("ERROR : ", e);
@@ -93,9 +102,8 @@ function searchAllDanhMuc() {
     });
 }
 
-function loadDanhMuc(data) {
-    $.each(data, function(index, item) {
-        index++;
+function loadDanhMuc(data, index) {
+    $.each(data, function(idx, item) {
         var statusClass = "status--process";
         var trangThai = "Đang hoạt động";
         var btnName = "Ẩn sản phẩm"
@@ -106,8 +114,8 @@ function loadDanhMuc(data) {
         }
         $('#listDanhMuc').append(
             `<tr class="tr-shadow" id="row_${item.idDanhMucSP}">
-                <td>${index}</td>
-                <td>
+                <td>${index++}</td>
+                <td id="ten_${item.idDanhMucSP}">
                     ${item.tenDanhMuc}
                 </td>
                 <td>
@@ -130,7 +138,7 @@ function loadDanhMuc(data) {
 }
 
 function suaDanhMuc(idDanhMucSP) {
-    $("#detailDanhMuc").attr("style", "padding-right: 17px; display: block;");
+    $("#detailDanhMuc").modal("toggle");
     $("#mediumModalLabel").text("Sửa danh mục");
     $.ajax({
         type: "GET",

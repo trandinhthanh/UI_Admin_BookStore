@@ -49,7 +49,7 @@
                 data.nguoiTao = account.tenNguoiDung;
                 createGiamGia(JSON.stringify(data));
             } else {
-                data.ngayThayDoi = account.tenNguoiDung;
+                data.nguoiThayDoi = account.tenNguoiDung;
                 updateGiamGia(JSON.stringify(data));
             }
         } else {
@@ -72,7 +72,7 @@ function createGiamGia(data) {
             alert("Tạo chương trình giảm giá thành công!");
         },
         error: function(e) {
-            alert("Tạo chương trình không thành công vui lòng thử lại!")
+            alert("Chương trình giảm giá đã tồn tại, vui lòng tạo chương trình mới!")
             console.log("ERROR : ", e);
 
         }
