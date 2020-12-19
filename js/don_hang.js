@@ -113,7 +113,7 @@ function loadDonHang(data) {
         } else if (item.trangThai == 1) {
             trangThai = "Đang giao hàng";
             statusClass = "status--process";
-            changeStatus = "Xác nhận đang giao hàng";
+            changeStatus = "Xác nhận đã giao hàng";
         } else if (item.trangThai == 2) {
             trangThai = "Đã giao hàng";
             statusClass = "status--process";
