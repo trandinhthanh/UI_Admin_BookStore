@@ -76,6 +76,7 @@ function searchAllSanPham() {
         contentType: false,
         success: function(data) {
             $('#listSanPham').empty();
+            $('#tongDauSach').text(data.length);
             loadItem(data);
         },
         error: function(e) {
