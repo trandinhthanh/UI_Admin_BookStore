@@ -52,7 +52,7 @@
                 update(JSON.stringify(data));
             }
         } else {
-            alert("Vui lòng kiểm tra lại thông tin còn thiếu!");
+            alert("Vui lòng kiểm tra lại thông tin sai hoặc còn thiếu!");
             return;
         }
     });

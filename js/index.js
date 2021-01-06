@@ -82,13 +82,21 @@ function replateDateDoanhSo(data) {
 function loadDanhSachDoanhSoSP(data) {
     $('#listDoanhThu').empty();
     $.each(data, function(index, item) {
+        var tienLoi = 0;
+        var tienLo = 0;
+        if (item.tienLoi >= 0) {
+            tienLoi = item.tienLoi;
+        } else {
+            tienLo = item.tienLoi;
+        }
         $('#listDoanhThu').append(
             `<tr>
                 <td>${item.tenSanPham}</td>
                 <td>${item.loai}</td>
                 <td>${item.soLuong}</td>
                 <td>${formatMoney(item.tienVon)}</td>
-                <td>${formatMoney(item.tienLoi)}</td>
+                <td>${formatMoney(tienLoi)}</td>
+                <td>${formatMoney(tienLo)}</td>
                 <td>${formatMoney(item.tienThuVe)}</td>
             </tr>`
         );

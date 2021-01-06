@@ -31,6 +31,9 @@
                 $("#trangThai").addClass(statusClass);
                 result.ngayMua = formatDate(result.ngayMua);
                 setDataInForm('.form-donHang', result);
+                if (result.loaiThanhToan != null) {
+                    $("#trangThai").val(result.trangThai + ' - đã thanh toán qua ' + result.loaiThanhToan);
+                }
                 $.each(result.sanPhamThanhTiens, function(index, item) {
                     var thanhTien = formatMoney(item.gia);
                     var giaSach = formatMoney(Number(item.gia) / Number(item.soLuong));

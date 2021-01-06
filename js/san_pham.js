@@ -47,10 +47,11 @@
         $("#valueSearch").val("");
         var idDanhMucSP = $("#sortByDanhMuc").val();
         var loaiSapXep = $("#sortByGia").val();
+        var loaiTrangThai = $("#sortByTrangThai").val();
         $.ajax({
             type: "GET",
             enctype: 'multipart/form-data',
-            url: "http://localhost:8080/sanPham/locSanPham/" + idDanhMucSP + "/" + loaiSapXep,
+            url: "http://localhost:8080/sanPham/locSanPham/" + idDanhMucSP + "/" + loaiSapXep + "/" + loaiTrangThai,
             async: false,
             crossDomain: true,
             contentType: false,
